@@ -21,6 +21,8 @@
 
 @implementation PhotoCVC
 
+@synthesize collectionView = _collectionView;
+
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad
@@ -30,7 +32,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     for (Photo *photo in self.userAlbum.photos){
         UIImage *image = [UIImage imageWithData:photo.thumbnail];
-        //[self.fullResolutionImageArray addObject:photo.image];
+        [self.fullResolutionImageArray addObject:photo.image];
         [self.thumbnailArray addObject:image];
     }
     
@@ -101,6 +103,7 @@ static NSString * const reuseIdentifier = @"Cell";
     NSManagedObjectContext *context = [self managedObjectContext];
     
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+    //Scale the image down for obvious performance reasons
     UIImage *scaleImage = [self imageWithImage:chosenImage scaledToFillSize:CGSizeMake(64, 64)];
     NSData *fullImage = UIImageJPEGRepresentation(chosenImage, 1.0);
     NSData *scaledImage = UIImageJPEGRepresentation(scaleImage, 0.1);
@@ -110,10 +113,8 @@ static NSString * const reuseIdentifier = @"Cell";
     addPhoto.image = fullImage;
     addPhoto.thumbnail = scaledImage;
     
-    //[self.fullResolutionImageArray addObject:fullImage];
-    //NSLog(@"%@ = fullresImageArray", self.fullResolutionImageArray);
-    //UIImage *thumbnailImage = [UIImage imageWithData:scaledImage];
-    [self.thumbnailArray addObject:scaledImage];
+    [self.fullResolutionImageArray addObject:fullImage];
+    [self.thumbnailArray addObject:scaleImage];
     [self.userAlbum addPhotosObject:addPhoto];
     
     NSError *error = nil;

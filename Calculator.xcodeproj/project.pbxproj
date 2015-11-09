@@ -16,6 +16,7 @@
 		F30770F11B44BA2E0080EDD5 /* CalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F30770F01B44BA2E0080EDD5 /* CalculatorTests.m */; };
 		F30DD0731BBDC24C009EE47D /* Contacts+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F30DD0701BBDC24C009EE47D /* Contacts+CoreDataProperties.m */; };
 		F30DD0741BBDC24C009EE47D /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = F30DD0721BBDC24C009EE47D /* Contacts.m */; };
+		F37673621BF10EEC00B1C0A4 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F37673611BF10EEC00B1C0A4 /* SettingsVC.m */; };
 		F385EF951BDAA55800A0FC90 /* ViewPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F385EF941BDAA55800A0FC90 /* ViewPhotoVC.m */; };
 		F38614DD1BE55C04000363EF /* Photo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F38614DA1BE55C04000363EF /* Photo+CoreDataProperties.m */; };
 		F38614DE1BE55C04000363EF /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = F38614DC1BE55C04000363EF /* Photo.m */; };
@@ -69,6 +70,8 @@
 		F30DD0711BBDC24C009EE47D /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contacts.h; sourceTree = "<group>"; };
 		F30DD0721BBDC24C009EE47D /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contacts.m; sourceTree = "<group>"; };
 		F33829F01BBFAA5A00D0AF6C /* Calculator 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Calculator 2.xcdatamodel"; sourceTree = "<group>"; };
+		F37673601BF10EEC00B1C0A4 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
+		F37673611BF10EEC00B1C0A4 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsVC.m; path = ../Calculator/SettingsVC.m; sourceTree = "<group>"; };
 		F385EF931BDAA55800A0FC90 /* ViewPhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPhotoVC.h; sourceTree = SOURCE_ROOT; };
 		F385EF941BDAA55800A0FC90 /* ViewPhotoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewPhotoVC.m; sourceTree = SOURCE_ROOT; };
 		F38614D91BE55C04000363EF /* Photo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				F3CBDA051B4CA0580096F1AB /* View Controllers */,
+				F37673631BF10F4C00B1C0A4 /* Settings */,
 				F3CBDA041B4CA0220096F1AB /* Model */,
 				F30770D41B44BA2E0080EDD5 /* Supporting Files */,
 			);
@@ -168,6 +172,7 @@
 				F30770D91B44BA2E0080EDD5 /* AppDelegate.m */,
 				F30770E31B44BA2E0080EDD5 /* LaunchScreen.xib */,
 				F30770DE1B44BA2E0080EDD5 /* Main.storyboard */,
+				F37673601BF10EEC00B1C0A4 /* SettingsVC.h */,
 				F30770E11B44BA2E0080EDD5 /* Images.xcassets */,
 				F30770D51B44BA2E0080EDD5 /* Info.plist */,
 				F30770D61B44BA2E0080EDD5 /* main.m */,
@@ -220,6 +225,22 @@
 			name = CalculatorCoreData;
 			sourceTree = "<group>";
 		};
+		F37673631BF10F4C00B1C0A4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F37673611BF10EEC00B1C0A4 /* SettingsVC.m */,
+			);
+			name = Settings;
+			path = Calculator.xcodeproj;
+			sourceTree = SOURCE_ROOT;
+		};
+		F37673641BF10F6B00B1C0A4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		F3973CAD1BB3147600DCA383 /* Password */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +279,7 @@
 		F3CBDA041B4CA0220096F1AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F37673641BF10F6B00B1C0A4 /* Settings */,
 				F3C3065D1BEEBF3500D7DA33 /* Calculator */,
 			);
 			name = Model;
@@ -440,6 +462,7 @@
 				F3CBDA031B4CA00C0096F1AB /* Calculator.m in Sources */,
 				F3973CB21BB314D800DCA383 /* PasswordTVC.m in Sources */,
 				F30770DA1B44BA2E0080EDD5 /* AppDelegate.m in Sources */,
+				F37673621BF10EEC00B1C0A4 /* SettingsVC.m in Sources */,
 				F30770D71B44BA2E0080EDD5 /* main.m in Sources */,
 				F3973CC11BB33BB600DCA383 /* Notes.m in Sources */,
 				F3CBDDFF1BC23D8D00910B81 /* Notes+CoreDataProperties.m in Sources */,
