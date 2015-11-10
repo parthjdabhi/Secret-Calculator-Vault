@@ -6,9 +6,10 @@
 //  Copyright © 2015 Corey Allen Pett. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import "ViewPhotoVC.h"
 
-@interface ViewPhotoVC () <UIScrollViewDelegate>
+@interface ViewPhotoVC () <UIScrollViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *displayImage;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -28,13 +29,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    //[self.tabBarController.tabBar setHidden:YES];
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
-    //[self.tabBarController.tabBar setHidden:NO];
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
@@ -53,7 +52,7 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Export Photo"
+    UIAlertAction *exportAction = [UIAlertAction actionWithTitle:@"Export Photo"
                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                                   {
                                       UIImage *fullResImage = [UIImage imageWithData:self.selectedImage];
@@ -61,7 +60,7 @@
                                   }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){}];
     
-    [alert addAction:firstAction];
+    [alert addAction:exportAction];
     [alert addAction:cancelAction];
     
     [self presentViewController:alert animated:YES completion:nil];

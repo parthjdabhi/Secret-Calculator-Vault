@@ -36,6 +36,12 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.thumbnailArray addObject:image];
     }
     
+    UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
+    flow.itemSize = CGSizeMake(100, 100);
+    flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    flow.minimumInteritemSpacing = 0;
+    flow.minimumLineSpacing = 0;
+    
     [self.collectionView reloadData];
     
     // Register cell classes
@@ -152,6 +158,20 @@ static NSString * const reuseIdentifier = @"Cell";
     photoImageView.image = self.thumbnailArray [indexPath.row];
     
     return cell;
+}
+
+//The next few methods minimize spacing between photos to create a mighty fine look
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    
+    return 0.00001;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.5;
 }
 
 //Set up NSManagedObject for fetching-saving
