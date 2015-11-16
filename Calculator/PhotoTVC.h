@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Album+CoreDataProperties.h"
 #import "Photo+CoreDataProperties.h"
+#import "PhotoStorage.h"
+
 
 @interface PhotoTVC : UITableViewController
 
-@property (strong, nonatomic) NSMutableArray *userAlbums;
+@property (strong, nonatomic) PhotoStorage *photoStorage;
 
 @end

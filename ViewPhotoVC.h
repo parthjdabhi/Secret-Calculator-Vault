@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Album+CoreDataProperties.h"
 #import "Photo+CoreDataProperties.h"
+#import "PhotoStorage.h"
+
 
 @interface ViewPhotoVC : UIViewController
 
-@property (strong, nonatomic) NSData *selectedImage;
-//@property (strong) NSManagedObject *selectedPhoto;
+@property (strong, nonatomic) PhotoStorage *photoStorage;
 
 @end

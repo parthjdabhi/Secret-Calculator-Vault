@@ -9,13 +9,20 @@
 #import "PhotoTVC.h"
 #import "PhotoCVC.h"
 
-@interface PhotoTVC () <UIAlertViewDelegate>
+@interface PhotoTVC () <UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *firstPhotos;
 
 @end
 
 @implementation PhotoTVC
+
+//Create a PhotoStorage Object
+-(PhotoStorage *) photoStorage
+{
+    if (!_photoStorage) _photoStorage = [[PhotoStorage alloc] init];
+    return _photoStorage;
+}
 
 - (void)viewDidLoad
 {
@@ -25,20 +32,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self fetchAlbums];
-}
-
-//Fetch the users saved albums
--(void)fetchAlbums
-{
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Album"];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
-    
-    self.userAlbums = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    
+    [self.photoStorage fetchAlbums];
     [self.tableView reloadData];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,8 +56,8 @@
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction *action)
                                {
-                                   [self createNewAlbum:addAlbumAlert.textFields.firstObject.text];
-                                   [self fetchAlbums];
+                                   [self.photoStorage createNewAlbum:addAlbumAlert.textFields.firstObject.text];
+                                   [self.tableView reloadData];
                                }];
     [addAlbumAlert addAction:cancelAction];
     [addAlbumAlert addAction:okAction];
@@ -71,24 +66,7 @@
      {
          textfield.placeholder = NSLocalizedString(@"Enter Album", @"Enter Album");
      }];
-    
     [self presentViewController:addAlbumAlert animated:YES completion:nil];
-}
-
-//Create a new album and save it
--(void)createNewAlbum:(NSString *)title
-{
-    NSManagedObjectContext *context = [self managedObjectContext];
-    Album *album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:context];
-    
-    album.title = title;
-    album.date = [NSDate date];
-    [self.userAlbums addObject:album];
-    NSError *error = nil;
-    // Save the object to persistent store
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-    }
 }
 
 #pragma mark - Table view data source
@@ -100,7 +78,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.userAlbums.count;
+    return self.photoStorage.userAlbums.count;
 }
 
 
@@ -109,7 +87,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     //Configure the cell..
-    Album *album = [self.userAlbums objectAtIndex:indexPath.row];
+    Album *album = [self.photoStorage.userAlbums objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:25.0f];
     [cell.textLabel setText:[album valueForKey:@"title"]];
 
@@ -127,7 +105,7 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete object from database
-        [context deleteObject:[self.userAlbums objectAtIndex:indexPath.row]];
+        [context deleteObject:[self.photoStorage.userAlbums objectAtIndex:indexPath.row]];
         
         NSError *error = nil;
         if (![context save:&error]) {
@@ -136,12 +114,17 @@
         }
         
         // Remove album from table view
-        [self.userAlbums removeObjectAtIndex:indexPath.row];
+        [self.photoStorage.userAlbums removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
-//Set up NSManagedObject for fetching
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.photoStorage.selectedAlbum = [self.photoStorage.userAlbums objectAtIndex:indexPath.row];
+}
+
+//Set up NSManagedObject for deleting an object
 - (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
     id delegate = [[UIApplication sharedApplication] delegate];
@@ -151,21 +134,14 @@
     return context;
 }
 
--(NSMutableArray *)userAlbums
-{
-    if(!_userAlbums) _userAlbums = [[NSMutableArray alloc] init];
-    return _userAlbums;
-}
-
 #pragma mark - Navigation
 
 //Pass NSManagedObject through viewControllers to add photos
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([[segue identifier] isEqualToString:@"toCollectionView"]){
-        Album *selectedAlbum = [self.userAlbums objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         PhotoCVC *destViewController = segue.destinationViewController;
-        destViewController.userAlbum = selectedAlbum;
+        destViewController.photoStorage = self.photoStorage;
     }
 }
 
