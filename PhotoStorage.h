@@ -20,6 +20,7 @@
 @property (strong, nonatomic) Photo *selectedPhoto;
 @property (nonatomic) long currentPhoto;
 
+-(void)deleteAlbum:(long)index;
 -(void)deletePhoto;
 -(void)fetchPhotos;
 -(void)fetchAlbums;

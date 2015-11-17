@@ -3,7 +3,7 @@
     <entity name="Album" representedClassName="Album" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="albumBook" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Photo" inverseName="albumBook" inverseEntity="Photo" syncable="YES"/>
     </entity>
     <entity name="Contacts" representedClassName="Contacts" syncable="YES">
         <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>

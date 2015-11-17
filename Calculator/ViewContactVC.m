@@ -32,23 +32,22 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
     //Inserts and formats users contact information for display
-    self.nameLabel.text = [[[self.contact valueForKey:@"firstName"] stringByAppendingString:@" "] stringByAppendingString:[self.contact valueForKey:@"lastName"]];
+    self.nameLabel.text = [[self.contactStorage.selectedContact.firstName stringByAppendingString:@" "] stringByAppendingString:self.contactStorage.selectedContact.lastName];
     
-    [self.companyButton setAttributedTitle:[self changeLabelTitle:@"Company: " labelName:[self.contact valueForKey:@"company"] startRange:9] forState:UIControlStateNormal];
+    [self.companyButton setAttributedTitle:[self changeLabelTitle:@"Company: " labelName:self.contactStorage.selectedContact.company startRange:9] forState:UIControlStateNormal];
     
-    [self.mobileButton setAttributedTitle:[self changeLabelTitle:@"Mobile: " labelName:[self.contact valueForKey:@"mobileNumber"] startRange:8] forState:UIControlStateNormal];
+    [self.mobileButton setAttributedTitle:[self changeLabelTitle:@"Mobile: " labelName:self.contactStorage.selectedContact.mobileNumber startRange:8] forState:UIControlStateNormal];
     
-    [self.homeButton setAttributedTitle:[self changeLabelTitle:@"Home: " labelName:[self.contact valueForKey:@"homeNumber"] startRange:5] forState:UIControlStateNormal];
+    [self.homeButton setAttributedTitle:[self changeLabelTitle:@"Home: " labelName:self.contactStorage.selectedContact.homeNumber startRange:5] forState:UIControlStateNormal];
     
-    [self.workButton setAttributedTitle:[self changeLabelTitle:@"Work: " labelName:[self.contact valueForKey:@"workNumber"] startRange:6] forState:UIControlStateNormal];
+    [self.workButton setAttributedTitle:[self changeLabelTitle:@"Work: " labelName:self.contactStorage.selectedContact.workNumber startRange:6] forState:UIControlStateNormal];
     
-    [self.emailButton setAttributedTitle:[self changeLabelTitle:@"Email: " labelName:[self.contact valueForKey:@"email"] startRange:7] forState:UIControlStateNormal];
+    [self.emailButton setAttributedTitle:[self changeLabelTitle:@"Email: " labelName:self.contactStorage.selectedContact.email startRange:7] forState:UIControlStateNormal];
     
-    [self.webpageButton setAttributedTitle:[self changeLabelTitle:@"Website: " labelName:[self.contact valueForKey:@"website"] startRange:9] forState:UIControlStateNormal];
+    [self.webpageButton setAttributedTitle:[self changeLabelTitle:@"Website: " labelName:self.contactStorage.selectedContact.website startRange:9] forState:UIControlStateNormal];
     
-    [self.notesButton setAttributedTitle:[self changeLabelTitle:@"Notes: " labelName:[self.contact valueForKey:@"notes"]startRange:7] forState:UIControlStateNormal];
+    [self.notesButton setAttributedTitle:[self changeLabelTitle:@"Notes: " labelName:self.contactStorage.selectedContact.notes startRange:7] forState:UIControlStateNormal];
 }
 
 //Formats user information
@@ -75,8 +74,8 @@
 //Call mobile phone when pressed
 - (IBAction)mobileButton:(id)sender
 {
-    if([self.contact valueForKey:@"mobileNumber"]){
-        NSString *mobileNumber = [self.contact valueForKey:@"mobileNumber"];
+    if(self.contactStorage.selectedContact.mobileNumber){
+        NSString *mobileNumber = self.contactStorage.selectedContact.mobileNumber;
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel://" stringByAppendingString:mobileNumber]]];
     }
 }
@@ -84,8 +83,8 @@
 //Call home phone when pressed
 - (IBAction)homeButton:(id)sender
 {
-    if([self.contact valueForKey:@"homeNumber"]){
-        NSString *homeNumber = [self.contact valueForKey:@"homeNumber"];
+    if(self.contactStorage.selectedContact.homeNumber){
+        NSString *homeNumber = self.contactStorage.selectedContact.homeNumber;
         [[UIApplication sharedApplication]
          openURL:[NSURL URLWithString:[@"tel://" stringByAppendingPathComponent:homeNumber]]];
     }
@@ -94,8 +93,8 @@
 //Call work phone when pressed
 - (IBAction)workButton:(id)sender
 {
-    if([self.contact valueForKey:@"workNumber"]){
-        NSString *workNumber = [self.contact valueForKey:@"workNumber"];
+    if(self.contactStorage.selectedContact.workNumber){
+        NSString *workNumber = self.contactStorage.selectedContact.workNumber;
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel://" stringByAppendingPathComponent:workNumber]]];
     }
 }
@@ -103,8 +102,8 @@
 //Composes an email for user when pressed
 - (IBAction)emailButton:(id)sender
 {
-    if([self.contact valueForKey:@"email"]){
-        NSString *email = [self.contact valueForKey:@"email"];
+    if(self.contactStorage.selectedContact.email){
+        NSString *email = self.contactStorage.selectedContact.email;
         NSArray *toRecipents = [NSArray arrayWithObject:email];
         
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
@@ -120,9 +119,9 @@
 //Opens URL when pressed
 - (IBAction)webpageButton:(id)sender
 {
-    if([self.contact valueForKey:@"website"]){
-    NSString *webpage = [@"https://" stringByAppendingString:[self.contact valueForKey:@"website"]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:webpage]];
+    if(self.contactStorage.selectedContact.website){
+        NSString *webpage = [@"https://" stringByAppendingString:self.contactStorage.selectedContact.website];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:webpage]];
     }
 }
 
@@ -160,9 +159,8 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"toAddContact"]) {
-        NSManagedObject *selectedContact = self.contact;
         AddContactVC *destViewController = segue.destinationViewController;
-        destViewController.updateContact = selectedContact;
+        destViewController.contactStorage = self.contactStorage;
     }
 }
 

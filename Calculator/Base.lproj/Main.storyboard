@@ -149,8 +149,24 @@
                                 <action selector="actionButton:" destination="fcO-lc-CRR" id="4vY-Gh-ZXx"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="1MY-xA-Ot3"/>
-                        <barButtonItem systemItem="trash" id="eA1-vy-SxH"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="kn0-sb-rp5"/>
+                        <barButtonItem image="Back Arrow" id="0Jp-PS-b7d">
+                            <connections>
+                                <action selector="backArrow:" destination="fcO-lc-CRR" id="AmO-aY-4jf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="svo-x0-06J"/>
+                        <barButtonItem image="Front Arrow" id="DWa-VR-Mkq">
+                            <connections>
+                                <action selector="forwardArrow:" destination="fcO-lc-CRR" id="4fe-Yx-WP0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="jUo-SU-plM"/>
+                        <barButtonItem systemItem="trash" id="eA1-vy-SxH">
+                            <connections>
+                                <action selector="trashButton:" destination="fcO-lc-CRR" id="kGp-wz-2Kb"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="oyJ-TU-GRy">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="Gnm-Ff-JJX">

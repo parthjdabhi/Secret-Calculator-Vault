@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PasswordStorage.h"
 #import "Passwords+CoreDataProperties.h"
 
 @interface ViewPasswordVC : UIViewController
 
-@property (strong) NSManagedObject *password;
+@property (strong, nonatomic) PasswordStorage *passwordStorage;
 
 @end

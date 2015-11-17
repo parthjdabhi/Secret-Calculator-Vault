@@ -46,6 +46,19 @@
     }
 }
 
+//Delete chosen album
+-(void)deleteAlbum:(long)index
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    [context deleteObject:[self.userAlbums objectAtIndex:index]];
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+        return;
+    }
+    [self.userAlbums removeObjectAtIndex:index];
+}
+
 //Add selected photo to selected album
 -(void)addPhotoToAlbum:(UIImage *)image
 {

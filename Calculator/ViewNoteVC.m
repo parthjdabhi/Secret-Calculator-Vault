@@ -16,6 +16,12 @@
 
 @implementation ViewNoteVC
 
+-(NoteStorage *)noteStorage
+{
+    if(!_noteStorage) _noteStorage = [[NoteStorage alloc] init];
+    return _noteStorage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -28,9 +34,9 @@
     [self.view addGestureRecognizer:tap];
 
     //If a editing note, place current note informtion into the note
-    if (self.note){
-        self.textView.text = [self.note valueForKey:@"notes"];
-        self.dateLabel.text = [@"Last edited On: " stringByAppendingString:[NSDateFormatter localizedStringFromDate:[self.note valueForKey: @"date"]
+    if (self.noteStorage.selectedNote){
+        self.textView.text = self.noteStorage.selectedNote.notes;
+        self.dateLabel.text = [@"Last edited On: " stringByAppendingString:[NSDateFormatter localizedStringFromDate:self.noteStorage.selectedNote.date
                                                                                                     dateStyle:NSDateFormatterShortStyle
                                                                                                     timeStyle:NSDateFormatterShortStyle]];
     }
@@ -62,39 +68,23 @@
 
 - (IBAction)saveButton:(id)sender
 {
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
     //Save user note information when user is editing a current note
-    if (self.note){
-        [self.note setValue:self.textView.text forKey:@"notes"];
+    if (self.noteStorage.selectedNote){
+        self.textView.text = self.noteStorage.selectedNote.notes;
         
         //Set the title no bigger than 30 characters
         if(self.textView.text.length > 30){
-            [self.note setValue:[self.textView.text substringToIndex:30] forKey:@"title"];
+            self.noteStorage.selectedNote.title = [self.textView.text substringToIndex:30];
         }
         else{
-            [self.note setValue:self.textView.text forKey:@"title"];        }
-        [self.note setValue:[NSDate date] forKey:@"date"];
+            self.noteStorage.selectedNote.title = self.textView.text;
+            self.noteStorage.selectedNote.date = [NSDate date];
+        }
     }
     
     //If user is not editing a current note, create new note
     else {
-        Notes *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Notes" inManagedObjectContext:context];
-        newNote.date = [NSDate date];
-        
-        //Set the title no bigger than 30 characters
-        if(self.textView.text.length > 30){
-            newNote.title = [self.textView.text substringToIndex:30];
-        }
-        else{
-            newNote.title = self.textView.text;
-        }
-        newNote.notes = self.textView.text;
-    }
-    NSError *error = nil;
-    // Save the object to persistent store
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        [self.noteStorage createNote:self.textView.text];
     }
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -106,6 +96,10 @@
                                                           dateStyle:NSDateFormatterShortStyle
                                                           timeStyle:NSDateFormatterShortStyle]];
     
+}
+
+-(void)textViewDidChange:(UITextView *)textView
+{
     //Enable save button if the user has text in his/her note
     if(self.textView.text.length > 0){
         self.saveButton.enabled = YES;
@@ -113,16 +107,6 @@
     else{
         self.saveButton.enabled = NO;
     }
-}
-
-//Set up NSManagedObject for fetching-saving
-- (NSManagedObjectContext *)managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
 }
 
 @end

@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NoteStorage.h"
 #import "Notes+CoreDataProperties.h"
 
 @interface NotesTVC : UITableViewController
 
-@property (strong, nonatomic) NSMutableArray *userNotes;
+@property (strong, nonatomic) NoteStorage *noteStorage;
 @property (strong, nonatomic) NSArray *searchResults;
 
 @end

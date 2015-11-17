@@ -27,14 +27,14 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     //Inserts and formats users contact information for display
-    self.titleLabel.text = [self.password valueForKey:@"title"];
-    [self.usernameButton setAttributedTitle:[self changeLabelTitle:@"Username: " labelName:[self.password valueForKey:@"username"] startRange:10] forState:UIControlStateNormal];
+    self.titleLabel.text = self.passwordStorage.selectedPassword.title;
+    [self.usernameButton setAttributedTitle:[self changeLabelTitle:@"Username: " labelName:self.passwordStorage.selectedPassword.username startRange:10] forState:UIControlStateNormal];
     
-    [self.passwordButton setAttributedTitle:[self changeLabelTitle:@"Password: " labelName:[self.password valueForKey:@"password"] startRange:10] forState:UIControlStateNormal];
+    [self.passwordButton setAttributedTitle:[self changeLabelTitle:@"Password: " labelName:self.passwordStorage.selectedPassword.password startRange:10] forState:UIControlStateNormal];
     
-    [self.websiteButton setAttributedTitle:[self changeLabelTitle:@"Website: " labelName:[self.password valueForKey:@"website"] startRange:9] forState:UIControlStateNormal];
+    [self.websiteButton setAttributedTitle:[self changeLabelTitle:@"Website: " labelName:self.passwordStorage.selectedPassword.website startRange:9] forState:UIControlStateNormal];
     
-    [self.notesButton setAttributedTitle:[self changeLabelTitle:@"Notes: " labelName:[self.password valueForKey:@"notes"] startRange:7] forState:UIControlStateNormal];
+    [self.notesButton setAttributedTitle:[self changeLabelTitle:@"Notes: " labelName:self.passwordStorage.selectedPassword.notes startRange:7] forState:UIControlStateNormal];
 }
 
 //Formats user information
@@ -61,8 +61,8 @@
 //Opens URL when pressed
 - (IBAction)websiteButton:(id)sender
 {
-    if([self.password valueForKey:@"website"]){
-        NSString *webAddress = [@"http://" stringByAppendingString:[self.password valueForKey:@"website"]];
+    if(self.passwordStorage.selectedPassword.website){
+        NSString *webAddress = [@"http://" stringByAppendingString:self.passwordStorage.selectedPassword.website];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:webAddress]];
     }
 }
@@ -78,9 +78,8 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"toAddPassword"]) {
-        NSManagedObject *selectedPassword = self.password;
         AddPasswordVC *destViewController = segue.destinationViewController;
-        destViewController.updatePassword = selectedPassword;
+        destViewController.passwordStorage = self.passwordStorage;
     }
 }
 

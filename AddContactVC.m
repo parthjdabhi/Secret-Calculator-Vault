@@ -30,6 +30,13 @@
 
 @implementation AddContactVC
 
+//If no contact exists already, set up contactStorage object
+-(ContactStorage *)contactStorage
+{
+    if(!_contactStorage) _contactStorage = [[ContactStorage alloc] init];
+    return _contactStorage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -66,16 +73,16 @@
     self.webpageTextfield.delegate = self;
     
     //If editing contact, place current contact information into the contact form
-    if(self.updateContact) {
-        self.firstNameTextfield.text = [self.updateContact valueForKey:@"firstName"];
-        self.lastNameTextfield.text = [self.updateContact valueForKey:@"lastName"];
-        self.companyTextfield.text = [self.updateContact valueForKey:@"company"];
-        self.mobileNumberTextfield.text = [self.updateContact valueForKey:@"mobileNumber"];
-        self.homeNumberTextfield.text = [self.updateContact valueForKey:@"homeNumber"];
-        self.workNumberTextfield.text = [self.updateContact valueForKey:@"workNumber"];
-        self.emailTextfield.text = [self.updateContact valueForKey:@"email"];
-        self.notesTextfield.text = [self.updateContact valueForKey:@"notes"];
-        self.webpageTextfield.text = [self.updateContact valueForKey:@"website"];
+    if(self.contactStorage.selectedContact) {
+        self.firstNameTextfield.text = self.contactStorage.selectedContact.firstName;
+        self.lastNameTextfield.text = self.contactStorage.selectedContact.lastName;
+        self.companyTextfield.text = self.contactStorage.selectedContact.company;
+        self.mobileNumberTextfield.text = self.contactStorage.selectedContact.mobileNumber;
+        self.homeNumberTextfield.text = self.contactStorage.selectedContact.homeNumber;
+        self.workNumberTextfield.text = self.contactStorage.selectedContact.workNumber;
+        self.emailTextfield.text = self.contactStorage.selectedContact.email;
+        self.notesTextfield.text = self.contactStorage.selectedContact.notes;
+        self.webpageTextfield.text = self.contactStorage.selectedContact.website;
     }
     
     //Enable save button if the first name textfield is filled out
@@ -116,7 +123,7 @@
     
 }
 
-//Dismiss keyboard method
+//Dismiss keyboard method for all textfields
 -(void)dismissKeyboard {
     [self.firstNameTextfield resignFirstResponder];
     [self.lastNameTextfield resignFirstResponder];
@@ -137,44 +144,34 @@
 - (IBAction)saveButton:(id)sender
 {
     //Save user contact information when user is editing a current contact
-    NSManagedObjectContext *context = [self managedObjectContext];
-    if(self.updateContact){
-        [self.updateContact setValue:self.firstNameTextfield.text forKey:@"firstName"];
-        [self.updateContact setValue:self.lastNameTextfield.text forKey:@"lastName"];
-        [self.updateContact setValue:self.companyTextfield.text forKey:@"company"];
-        [self.updateContact setValue:self.mobileNumberTextfield.text forKey:@"mobileNumber"];
-        [self.updateContact setValue:self.homeNumberTextfield.text forKey:@"homeNumber"];
-        [self.updateContact setValue:self.workNumberTextfield.text forKey:@"workNumber"];
-        [self.updateContact setValue:self.emailTextfield.text forKey:@"email"];
-        [self.updateContact setValue:self.notesTextfield.text forKey:@"notes"];
-        [self.updateContact setValue:self.webpageTextfield.text forKey:@"website"];
-        [self.updateContact setValue:[NSDate date] forKey:@"date"];
+    if(self.contactStorage.selectedContact){
+        self.contactStorage.selectedContact.firstName = self.firstNameTextfield.text;
+        self.contactStorage.selectedContact.lastName = self.lastNameTextfield.text;
+        self.contactStorage.selectedContact.company = self.companyTextfield.text;
+        self.contactStorage.selectedContact.mobileNumber = self.mobileNumberTextfield.text;
+        self.contactStorage.selectedContact.homeNumber = self.homeNumberTextfield.text;
+        self.contactStorage.selectedContact.workNumber = self.workNumberTextfield.text;
+        self.contactStorage.selectedContact.email = self.emailTextfield.text;
+        self.contactStorage.selectedContact.notes = self.notesTextfield.text;
+        self.contactStorage.selectedContact.website = self.webpageTextfield.text;
+        self.contactStorage.selectedContact.date = [NSDate date];
     }
     
     //If user is not editing a current contact, create new contact
     else {
-        //Create a new managed object
-        Contacts *newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Contacts" inManagedObjectContext:context];
-        newContact.date = [NSDate date];
-        newContact.firstName = self.firstNameTextfield.text;
-        newContact.lastName = self.lastNameTextfield.text;
-        newContact.company = self.companyTextfield.text;
-        newContact.mobileNumber = self.mobileNumberTextfield.text;
-        newContact.homeNumber = self.homeNumberTextfield.text;
-        newContact.workNumber = self.workNumberTextfield.text;
-        newContact.email = self.emailTextfield.text;
-        newContact.notes = self.notesTextfield.text;
-        newContact.website = self.webpageTextfield.text;
+        [self.contactStorage createContact:self.firstNameTextfield.text
+                                  lastName:self.lastNameTextfield.text
+                                   company:self.companyTextfield.text
+                              mobileNumber:self.mobileNumberTextfield.text
+                                homeNumber:self.homeNumberTextfield.text
+                                workNumber:self.workNumberTextfield.text
+                                     email:self.emailTextfield.text
+                                     notes:self.notesTextfield.text
+                                   website:self.webpageTextfield.text];
     }
-    NSError *error = nil;
-    // Save the object to persistent store
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-    }
-    
     //Pass the data back to view the contact
     ViewContactVC *destinationController = [[ViewContactVC alloc] init];
-    destinationController.contact = self.updateContact;
+    destinationController.contactStorage = self.contactStorage;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -216,16 +213,6 @@
         return YES;
     }
     return NO;
-}
-
-//Set up NSManagedObject for fetching-saving
-- (NSManagedObjectContext *)managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
 }
 
 @end

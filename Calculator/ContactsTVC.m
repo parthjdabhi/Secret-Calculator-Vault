@@ -15,6 +15,13 @@
 
 @implementation ContactsTVC
 
+//Create a contactStorage object
+-(ContactStorage *)contactStorage
+{
+    if(!_contactStorage) _contactStorage = [[ContactStorage alloc] init];
+    return _contactStorage;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -23,13 +30,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     //Fetch all of the user's saved contacts
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Contacts"];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]];
-    self.userContacts = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    
+    [self.contactStorage fetchContacts];
     [self.tableView reloadData];
 }
 
@@ -47,7 +49,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //Return the number of rows in the section.
-    return self.userContacts.count;
+    return self.contactStorage.userContacts.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -55,12 +57,17 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     //Configure the cell...
-    Contacts *contact = [self.userContacts objectAtIndex:indexPath.row];
-    NSString *name = [[[contact valueForKey:@"firstName"] stringByAppendingString:@" "] stringByAppendingString:[contact valueForKey:@"lastName"]];
+    Contacts *contact = [self.contactStorage.userContacts objectAtIndex:indexPath.row];
+    NSString *name = [[contact.firstName stringByAppendingString:@" "] stringByAppendingString:contact.lastName];
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:25.0f];
     [cell.textLabel setText:name];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.contactStorage.selectedContact = [self.contactStorage.userContacts objectAtIndex:indexPath.row];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,44 +77,20 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete object from database
-        [context deleteObject:[self.userContacts objectAtIndex:indexPath.row]];
-        
-        NSError *error = nil;
-        if (![context save:&error]) {
-            NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
-            return;
-        }
-        
-        // Remove user contact from table view
-        [self.userContacts removeObjectAtIndex:indexPath.row];
+        [self.contactStorage deleteContact:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
-//Set up NSManagedObject for fetching
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
 #pragma mark - Navigation
 
-//Pass NSManagedObject through viewControllers to view-edit user's contact
+//Pass ContactStorage through viewControllers to view-edit user's contact
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"toViewContact"]) {
-        NSManagedObject *selectedContact = [self.userContacts objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         ViewContactVC *destViewController = segue.destinationViewController;
-        destViewController.contact = selectedContact;
+        destViewController.contactStorage = self.contactStorage;
     }
 }
 
