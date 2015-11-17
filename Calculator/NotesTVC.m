@@ -16,6 +16,12 @@
 
 @implementation NotesTVC
 
+-(NoteStorage *)noteStorage
+{
+    if(!_noteStorage) _noteStorage = [[NoteStorage alloc] init];
+    return _noteStorage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.searchBar.delegate = self;
@@ -28,11 +34,7 @@
     [super viewDidAppear:animated];
     
     //Fetch all the users saved notes
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Notes"];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
-    self.userNotes = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    
+    [self.noteStorage fetchNotes];
     [self.tableView reloadData];
 }
 
@@ -61,7 +63,7 @@
         return self.searchResults.count;
         
     } else {
-        return self.userNotes.count;
+        return self.noteStorage.userNotes.count;
     }
 }
 
@@ -73,7 +75,7 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         note = [self.searchResults objectAtIndex:indexPath.row];
     } else {
-        note = [self.userNotes objectAtIndex:indexPath.row];
+        note = [self.noteStorage.userNotes objectAtIndex:indexPath.row];
     }
     
     //Configure the cell...
@@ -94,21 +96,10 @@
 
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
+{    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete object from database
-        [context deleteObject:[self.userNotes objectAtIndex:indexPath.row]];
-        
-        NSError *error = nil;
-        if (![context save:&error]) {
-            NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
-            return;
-        }
-        
-        // Remove note from the table view
-        [self.userNotes removeObjectAtIndex:indexPath.row];
+        [self.noteStorage deleteNote:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -116,7 +107,7 @@
 //Filter the results when user types into the searchBar
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
-    NSArray *userNotesArray = [self.userNotes copy];
+    NSArray *userNotesArray = [self.noteStorage.userNotes copy];
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"title contains[c] %@", searchText];
     self.searchResults = [userNotesArray filteredArrayUsingPredicate:resultPredicate];
 }
@@ -132,20 +123,9 @@
     return YES;
 }
 
-//Set up NSManagedObject for fetching
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
 #pragma mark - Navigation
 
-//Pass NSManagedObject through viewControllers to view-edit user's password
+//Pass noteStorage to ViewNote
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
  {
     if ([[segue identifier] isEqualToString:@"toViewNote"]) {
@@ -154,13 +134,13 @@
         
         if (self.searchDisplayController.active) {
             indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-            selectedNote = [self.searchResults objectAtIndex:indexPath.row];
+            self.noteStorage.selectedNote = [self.searchResults objectAtIndex:indexPath.row];
         } else {
             indexPath = [self.tableView indexPathForSelectedRow];
-            selectedNote = [self.userNotes objectAtIndex:indexPath.row];
+            self.noteStorage.selectedNote = [self.noteStorage.userNotes objectAtIndex:indexPath.row];
         }
     ViewNoteVC *destViewController = segue.destinationViewController;
-    destViewController.note = selectedNote;
+        destViewController.noteStorage = self.noteStorage;
     }
  }
 

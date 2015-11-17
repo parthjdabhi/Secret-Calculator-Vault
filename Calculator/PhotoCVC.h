@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Album+CoreDataProperties.h"
 #import "Photo+CoreDataProperties.h"
+#import "PhotoStorage.h"
 
 @interface PhotoCVC : UICollectionViewController
 
-@property (strong) Album *userAlbum;
-@property (strong, nonatomic) NSMutableArray *userPhotos;
-
--(UIImage *)imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size;
+@property (strong, nonatomic) PhotoStorage *photoStorage;
 
 @end

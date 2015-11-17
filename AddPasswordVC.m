@@ -23,6 +23,13 @@
 
 @implementation AddPasswordVC
 
+//If no password exists already, set up passwordStorage object
+-(PasswordStorage *)passwordStorage
+{
+    if(!_passwordStorage) _passwordStorage = [[PasswordStorage alloc] init];
+    return _passwordStorage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -45,12 +52,12 @@
     self.notesTextfield.delegate = self;
     
     //If editing contact, place current contact information into the contact form
-    if (self.updatePassword) {
-        self.titleTextfield.text = [self.updatePassword valueForKey:@"title"];
-        self.usernameTextfield.text =[self.updatePassword valueForKey:@"username"];
-        self.passwordTextfield.text = [self.updatePassword valueForKey:@"password"];
-        self.notesTextfield.text = [self.updatePassword valueForKey:@"notes"];
-        self.websiteTextfield.text = [self.updatePassword valueForKey:@"website"];
+    if (self.passwordStorage.selectedPassword) {
+        self.titleTextfield.text = self.passwordStorage.selectedPassword.title;
+        self.usernameTextfield.text = self.passwordStorage.selectedPassword.username;
+        self.passwordTextfield.text = self.passwordStorage.selectedPassword.password;
+        self.notesTextfield.text = self.passwordStorage.selectedPassword.notes;
+        self.websiteTextfield.text = self.passwordStorage.selectedPassword.website;
     }
     
     //Enable save button if the first name textfield is filled out
@@ -79,7 +86,7 @@
     
 }
 
-//Dismiss keyboard method
+//Dismiss keyboard method for all textfields
 -(void)dismissKeyboard
 {
     [self.titleTextfield resignFirstResponder];
@@ -89,7 +96,8 @@
     [self.notesTextfield resignFirstResponder];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -97,37 +105,26 @@
 - (IBAction)saveButton:(id)sender
 {
     //Save user contact information when user is editing a current contact
-    NSManagedObjectContext *context = [self managedObjectContext];
-    if(self.updatePassword){
-        [self.updatePassword setValue:self.titleTextfield.text forKey:@"title"];
-        [self.updatePassword setValue:self.usernameTextfield.text forKey:@"username"];
-        [self.updatePassword setValue:self.passwordTextfield.text forKey:@"password"];
-        [self.updatePassword setValue:self.websiteTextfield.text forKey:@"website"];
-        [self.updatePassword setValue:self.notesTextfield.text forKey:@"notes"];
-        [self.updatePassword setValue:[NSDate date] forKey:@"date"];
+    if(self.passwordStorage.selectedPassword){
+        self.passwordStorage.selectedPassword.title = self.titleTextfield.text;
+        self.passwordStorage.selectedPassword.username = self.usernameTextfield.text;
+        self.passwordStorage.selectedPassword.password = self.passwordTextfield.text;
+        self.passwordStorage.selectedPassword.website = self.websiteTextfield.text;
+        self.passwordStorage.selectedPassword.notes = self.notesTextfield.text;
+        self.passwordStorage.selectedPassword.date = [NSDate date];
     }
     
     //If user is not editing a current contact, create new contact
     else {
-        // Create a new managed object
-        Passwords *newPassword = [NSEntityDescription insertNewObjectForEntityForName:@"Passwords" inManagedObjectContext:context];
-        newPassword.date = [NSDate date];
-        newPassword.notes = self.notesTextfield.text;
-        newPassword.username = self.usernameTextfield.text;
-        newPassword.password = self.passwordTextfield.text;
-        newPassword.title = self.titleTextfield.text;
-            NSLog(@"yp %@", self.titleTextfield.text);
-        newPassword.website = self.websiteTextfield.text;
-            }
-        NSError *error = nil;
-        // Save the object to persistent store
-        if (![context save:&error]) {
-            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        [self.passwordStorage createPassword:self.titleTextfield.text
+                                    username:self.usernameTextfield.text
+                                    password:self.passwordTextfield.text
+                                     website:self.websiteTextfield.text
+                                       notes:self.notesTextfield.text];
     }
-    
     //Pass the data back to view the contact
     ViewPasswordVC *destinationController = [[ViewPasswordVC alloc] init];
-    destinationController.password = self.updatePassword;
+    destinationController.passwordStorage = self.passwordStorage;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -169,16 +166,6 @@
         return YES;
     }
     return NO;
-}
-
-//Set up NSManagedObject for fetching-saving
-- (NSManagedObjectContext *)managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
 }
 
 @end

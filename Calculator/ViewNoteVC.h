@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NoteStorage.h"
 #import "Notes+CoreDataProperties.h"
 
 @interface ViewNoteVC : UIViewController
 
-@property (strong) NSManagedObject *note;
+@property (strong, nonatomic) NoteStorage *noteStorage;
 
 @end

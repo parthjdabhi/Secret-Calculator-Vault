@@ -16,10 +16,17 @@
 		F30770F11B44BA2E0080EDD5 /* CalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F30770F01B44BA2E0080EDD5 /* CalculatorTests.m */; };
 		F30DD0731BBDC24C009EE47D /* Contacts+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F30DD0701BBDC24C009EE47D /* Contacts+CoreDataProperties.m */; };
 		F30DD0741BBDC24C009EE47D /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = F30DD0721BBDC24C009EE47D /* Contacts.m */; };
+		F34C90121BF3063000F3F953 /* PhotoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = F34C90111BF3063000F3F953 /* PhotoStorage.m */; };
+		F34C90181BF3281800F3F953 /* Album+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F34C90171BF3281800F3F953 /* Album+CoreDataProperties.m */; };
+		F34C901B1BF3297D00F3F953 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = F34C901A1BF3297D00F3F953 /* Album.m */; };
+		F34C901E1BF3BFF300F3F953 /* Album+methods.m in Sources */ = {isa = PBXBuildFile; fileRef = F34C901D1BF3BFF300F3F953 /* Album+methods.m */; };
 		F37673621BF10EEC00B1C0A4 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F37673611BF10EEC00B1C0A4 /* SettingsVC.m */; };
 		F385EF951BDAA55800A0FC90 /* ViewPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F385EF941BDAA55800A0FC90 /* ViewPhotoVC.m */; };
 		F38614DD1BE55C04000363EF /* Photo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F38614DA1BE55C04000363EF /* Photo+CoreDataProperties.m */; };
 		F38614DE1BE55C04000363EF /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = F38614DC1BE55C04000363EF /* Photo.m */; };
+		F39136A21BF94D3E00ACF081 /* NoteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = F39136A11BF94D3E00ACF081 /* NoteStorage.m */; };
+		F39136A51BF94E2900ACF081 /* ContactStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = F39136A41BF94E2900ACF081 /* ContactStorage.m */; };
+		F39136A81BF94E3A00ACF081 /* PasswordStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = F39136A71BF94E3A00ACF081 /* PasswordStorage.m */; };
 		F3973CB21BB314D800DCA383 /* PasswordTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3973CB11BB314D800DCA383 /* PasswordTVC.m */; };
 		F3973CB51BB3155900DCA383 /* AddPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3973CB41BB3155900DCA383 /* AddPasswordVC.m */; };
 		F3973CB81BB3158400DCA383 /* ViewPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3973CB71BB3158400DCA383 /* ViewPasswordVC.m */; };
@@ -31,8 +38,6 @@
 		F3CBDE021BC23F5B00910B81 /* ViewNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CBDE011BC23F5B00910B81 /* ViewNoteVC.m */; };
 		F3D12FA81BBA014E00BA5005 /* Passwords+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D12FA51BBA014E00BA5005 /* Passwords+CoreDataProperties.m */; };
 		F3D12FA91BBA014E00BA5005 /* Passwords.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D12FA71BBA014E00BA5005 /* Passwords.m */; };
-		F3D8BF7A1BD15BA300647538 /* Album+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8BF771BD15BA300647538 /* Album+CoreDataProperties.m */; };
-		F3D8BF7B1BD15BA300647538 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8BF791BD15BA300647538 /* Album.m */; };
 		F3EBBC4A1BAB5FA500A71E4A /* Calculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3EBBC481BAB5FA500A71E4A /* Calculator.xcdatamodeld */; };
 		F3EBBC5C1BACB6F600A71E4A /* ContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EBBC5B1BACB6F600A71E4A /* ContactsTVC.m */; };
 		F3EBBC631BACC0DA00A71E4A /* ViewContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EBBC621BACC0DA00A71E4A /* ViewContactVC.m */; };
@@ -70,6 +75,14 @@
 		F30DD0711BBDC24C009EE47D /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contacts.h; sourceTree = "<group>"; };
 		F30DD0721BBDC24C009EE47D /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contacts.m; sourceTree = "<group>"; };
 		F33829F01BBFAA5A00D0AF6C /* Calculator 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Calculator 2.xcdatamodel"; sourceTree = "<group>"; };
+		F34C90101BF3063000F3F953 /* PhotoStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoStorage.h; sourceTree = SOURCE_ROOT; };
+		F34C90111BF3063000F3F953 /* PhotoStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoStorage.m; sourceTree = SOURCE_ROOT; };
+		F34C90161BF3281800F3F953 /* Album+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Album+CoreDataProperties.h"; sourceTree = "<group>"; };
+		F34C90171BF3281800F3F953 /* Album+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Album+CoreDataProperties.m"; sourceTree = "<group>"; };
+		F34C90191BF3297D00F3F953 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		F34C901A1BF3297D00F3F953 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		F34C901C1BF3BFF300F3F953 /* Album+methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Album+methods.h"; sourceTree = "<group>"; };
+		F34C901D1BF3BFF300F3F953 /* Album+methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Album+methods.m"; sourceTree = "<group>"; };
 		F37673601BF10EEC00B1C0A4 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
 		F37673611BF10EEC00B1C0A4 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsVC.m; path = ../Calculator/SettingsVC.m; sourceTree = "<group>"; };
 		F385EF931BDAA55800A0FC90 /* ViewPhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPhotoVC.h; sourceTree = SOURCE_ROOT; };
@@ -78,6 +91,12 @@
 		F38614DA1BE55C04000363EF /* Photo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		F38614DB1BE55C04000363EF /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		F38614DC1BE55C04000363EF /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		F39136A01BF94D3E00ACF081 /* NoteStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoteStorage.h; path = ../NoteStorage.h; sourceTree = "<group>"; };
+		F39136A11BF94D3E00ACF081 /* NoteStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoteStorage.m; path = ../NoteStorage.m; sourceTree = "<group>"; };
+		F39136A31BF94E2900ACF081 /* ContactStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactStorage.h; sourceTree = SOURCE_ROOT; };
+		F39136A41BF94E2900ACF081 /* ContactStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactStorage.m; sourceTree = SOURCE_ROOT; };
+		F39136A61BF94E3A00ACF081 /* PasswordStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordStorage.h; path = ../../../PasswordStorage.h; sourceTree = "<group>"; };
+		F39136A71BF94E3A00ACF081 /* PasswordStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordStorage.m; path = ../../../PasswordStorage.m; sourceTree = "<group>"; };
 		F3973CB01BB314D800DCA383 /* PasswordTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordTVC.h; sourceTree = "<group>"; };
 		F3973CB11BB314D800DCA383 /* PasswordTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordTVC.m; sourceTree = "<group>"; };
 		F3973CB31BB3155900DCA383 /* AddPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPasswordVC.h; path = ../AddPasswordVC.h; sourceTree = "<group>"; };
@@ -100,10 +119,6 @@
 		F3D12FA51BBA014E00BA5005 /* Passwords+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Passwords+CoreDataProperties.m"; sourceTree = "<group>"; };
 		F3D12FA61BBA014E00BA5005 /* Passwords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Passwords.h; sourceTree = "<group>"; };
 		F3D12FA71BBA014E00BA5005 /* Passwords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Passwords.m; sourceTree = "<group>"; };
-		F3D8BF761BD15BA300647538 /* Album+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Album+CoreDataProperties.h"; sourceTree = "<group>"; };
-		F3D8BF771BD15BA300647538 /* Album+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Album+CoreDataProperties.m"; sourceTree = "<group>"; };
-		F3D8BF781BD15BA300647538 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
-		F3D8BF791BD15BA300647538 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
 		F3EBBC491BAB5FA500A71E4A /* Calculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Calculator.xcdatamodel; sourceTree = "<group>"; };
 		F3EBBC5A1BACB6F600A71E4A /* ContactsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsTVC.h; path = ../Calculator/ContactsTVC.h; sourceTree = "<group>"; };
 		F3EBBC5B1BACB6F600A71E4A /* ContactsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsTVC.m; path = ../Calculator/ContactsTVC.m; sourceTree = "<group>"; };
@@ -158,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				F3CBDA051B4CA0580096F1AB /* View Controllers */,
-				F37673631BF10F4C00B1C0A4 /* Settings */,
 				F3CBDA041B4CA0220096F1AB /* Model */,
 				F30770D41B44BA2E0080EDD5 /* Supporting Files */,
 			);
@@ -217,12 +231,23 @@
 				F38614DA1BE55C04000363EF /* Photo+CoreDataProperties.m */,
 				F38614DB1BE55C04000363EF /* Photo.h */,
 				F38614DC1BE55C04000363EF /* Photo.m */,
-				F3D8BF761BD15BA300647538 /* Album+CoreDataProperties.h */,
-				F3D8BF771BD15BA300647538 /* Album+CoreDataProperties.m */,
-				F3D8BF781BD15BA300647538 /* Album.h */,
-				F3D8BF791BD15BA300647538 /* Album.m */,
+				F34C90161BF3281800F3F953 /* Album+CoreDataProperties.h */,
+				F34C90171BF3281800F3F953 /* Album+CoreDataProperties.m */,
+				F34C90191BF3297D00F3F953 /* Album.h */,
+				F34C901A1BF3297D00F3F953 /* Album.m */,
+				F34C901C1BF3BFF300F3F953 /* Album+methods.h */,
+				F34C901D1BF3BFF300F3F953 /* Album+methods.m */,
 			);
 			name = CalculatorCoreData;
+			sourceTree = "<group>";
+		};
+		F34C901F1BF3E42B00F3F953 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				F34C90101BF3063000F3F953 /* PhotoStorage.h */,
+				F34C90111BF3063000F3F953 /* PhotoStorage.m */,
+			);
+			name = Photo;
 			sourceTree = "<group>";
 		};
 		F37673631BF10F4C00B1C0A4 /* Settings */ = {
@@ -239,6 +264,33 @@
 			children = (
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		F39136A91BF94E4D00ACF081 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				F39136A01BF94D3E00ACF081 /* NoteStorage.h */,
+				F39136A11BF94D3E00ACF081 /* NoteStorage.m */,
+			);
+			name = Notes;
+			sourceTree = "<group>";
+		};
+		F39136AA1BF94E6900ACF081 /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				F39136A61BF94E3A00ACF081 /* PasswordStorage.h */,
+				F39136A71BF94E3A00ACF081 /* PasswordStorage.m */,
+			);
+			name = Password;
+			sourceTree = "<group>";
+		};
+		F39136AB1BF94E7500ACF081 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				F39136A31BF94E2900ACF081 /* ContactStorage.h */,
+				F39136A41BF94E2900ACF081 /* ContactStorage.m */,
+			);
+			name = Contacts;
 			sourceTree = "<group>";
 		};
 		F3973CAD1BB3147600DCA383 /* Password */ = {
@@ -279,8 +331,12 @@
 		F3CBDA041B4CA0220096F1AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F37673641BF10F6B00B1C0A4 /* Settings */,
 				F3C3065D1BEEBF3500D7DA33 /* Calculator */,
+				F39136AA1BF94E6900ACF081 /* Password */,
+				F39136AB1BF94E7500ACF081 /* Contacts */,
+				F39136A91BF94E4D00ACF081 /* Notes */,
+				F34C901F1BF3E42B00F3F953 /* Photo */,
+				F37673641BF10F6B00B1C0A4 /* Settings */,
 			);
 			name = Model;
 			path = ../Calculator.xcodeproj;
@@ -295,6 +351,7 @@
 				F3973CAD1BB3147600DCA383 /* Password */,
 				F3973CAF1BB3148F00DCA383 /* Notes */,
 				F3EBBC561BAB988F00A71E4A /* PhotoAlbum */,
+				F37673631BF10F4C00B1C0A4 /* Settings */,
 			);
 			name = "View Controllers";
 			path = Calculator.xcodeproj;
@@ -451,15 +508,16 @@
 				F38614DE1BE55C04000363EF /* Photo.m in Sources */,
 				F3CBDE021BC23F5B00910B81 /* ViewNoteVC.m in Sources */,
 				F3EBBC5C1BACB6F600A71E4A /* ContactsTVC.m in Sources */,
-				F3D8BF7A1BD15BA300647538 /* Album+CoreDataProperties.m in Sources */,
 				F30770DD1B44BA2E0080EDD5 /* CalculatorVC.m in Sources */,
 				F3EBBC4A1BAB5FA500A71E4A /* Calculator.xcdatamodeld in Sources */,
 				F385EF951BDAA55800A0FC90 /* ViewPhotoVC.m in Sources */,
 				F30DD0741BBDC24C009EE47D /* Contacts.m in Sources */,
 				F3EBBC631BACC0DA00A71E4A /* ViewContactVC.m in Sources */,
-				F3D8BF7B1BD15BA300647538 /* Album.m in Sources */,
 				F3D12FA91BBA014E00BA5005 /* Passwords.m in Sources */,
+				F39136A51BF94E2900ACF081 /* ContactStorage.m in Sources */,
 				F3CBDA031B4CA00C0096F1AB /* Calculator.m in Sources */,
+				F34C901B1BF3297D00F3F953 /* Album.m in Sources */,
+				F34C90181BF3281800F3F953 /* Album+CoreDataProperties.m in Sources */,
 				F3973CB21BB314D800DCA383 /* PasswordTVC.m in Sources */,
 				F30770DA1B44BA2E0080EDD5 /* AppDelegate.m in Sources */,
 				F37673621BF10EEC00B1C0A4 /* SettingsVC.m in Sources */,
@@ -467,9 +525,13 @@
 				F3973CC11BB33BB600DCA383 /* Notes.m in Sources */,
 				F3CBDDFF1BC23D8D00910B81 /* Notes+CoreDataProperties.m in Sources */,
 				F3973CB81BB3158400DCA383 /* ViewPasswordVC.m in Sources */,
+				F39136A81BF94E3A00ACF081 /* PasswordStorage.m in Sources */,
+				F34C90121BF3063000F3F953 /* PhotoStorage.m in Sources */,
 				F3973CBE1BB315EB00DCA383 /* NotesTVC.m in Sources */,
 				F3973CB51BB3155900DCA383 /* AddPasswordVC.m in Sources */,
 				F3BAF5B51B9D1B2300C47EC4 /* WebBrowserVC.m in Sources */,
+				F34C901E1BF3BFF300F3F953 /* Album+methods.m in Sources */,
+				F39136A21BF94D3E00ACF081 /* NoteStorage.m in Sources */,
 				F3EBBC691BAE241900A71E4A /* AddContactVC.m in Sources */,
 				F3D12FA81BBA014E00BA5005 /* Passwords+CoreDataProperties.m in Sources */,
 				F3FB78571BCDABDD005DFEFF /* PhotoTVC.m in Sources */,

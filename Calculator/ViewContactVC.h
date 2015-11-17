@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ContactStorage.h"
 #import "Contacts+CoreDataProperties.h"
 
 @interface ViewContactVC : UIViewController
 
-@property (strong) NSManagedObject *contact;
+@property (strong, nonatomic) ContactStorage *contactStorage;
 
 @end

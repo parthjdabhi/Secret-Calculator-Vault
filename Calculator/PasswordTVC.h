@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PasswordStorage.h"
 #import "Passwords+CoreDataProperties.h"
 
 @interface PasswordTVC : UITableViewController
 
-@property (strong, nonatomic) NSMutableArray *userPasswords;
+@property (strong, nonatomic) PasswordStorage *passwordStorage;
 
 @end

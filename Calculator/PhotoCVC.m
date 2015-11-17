@@ -13,8 +13,6 @@
 
 @interface PhotoCVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (strong, nonatomic) NSMutableArray *thumbnailArray;
-@property (strong, nonatomic) NSMutableArray *fullResolutionImageArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
@@ -30,17 +28,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     self.collectionView.delegate = self;
     
-    for (Photo *photo in self.userAlbum.photos){
-        UIImage *image = [UIImage imageWithData:photo.thumbnail];
-        [self.fullResolutionImageArray addObject:photo.image];
-        [self.thumbnailArray addObject:image];
-    }
-    
-    UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
-    flow.itemSize = CGSizeMake(100, 100);
-    flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    flow.minimumInteritemSpacing = 0;
-    flow.minimumLineSpacing = 0;
+    [self.photoStorage fetchPhotos];
     
     [self.collectionView reloadData];
     
@@ -48,6 +36,11 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self.collectionView reloadData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -76,6 +69,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
+//Action view
 - (IBAction)addPhotoButton:(id)sender
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
@@ -105,38 +99,16 @@ static NSString * const reuseIdentifier = @"Cell";
 
 //Save photo that the user selected
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{    
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
+{
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-    //Scale the image down for obvious performance reasons
-    UIImage *scaleImage = [self imageWithImage:chosenImage scaledToFillSize:CGSizeMake(64, 64)];
-    NSData *fullImage = UIImageJPEGRepresentation(chosenImage, 1.0);
-    NSData *scaledImage = UIImageJPEGRepresentation(scaleImage, 0.1);
-    
-    Photo *addPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
-    addPhoto.date = [NSDate date];
-    addPhoto.image = fullImage;
-    addPhoto.thumbnail = scaledImage;
-    
-    [self.fullResolutionImageArray addObject:fullImage];
-    [self.thumbnailArray addObject:scaleImage];
-    [self.userAlbum addPhotosObject:addPhoto];
-    
-    NSError *error = nil;
-    // Save the object to persistent store
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-    }
+    [self.photoStorage addPhotoToAlbum:chosenImage];
     [self.collectionView reloadData];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -147,7 +119,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.thumbnailArray.count;
+    return self.photoStorage.scaledImageArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -155,12 +127,19 @@ static NSString * const reuseIdentifier = @"Cell";
     
     //Configure the cell
     UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
-    photoImageView.image = self.thumbnailArray [indexPath.row];
+    photoImageView.image = self.photoStorage.scaledImageArray [indexPath.row];
     
     return cell;
 }
 
-//The next few methods minimize spacing between photos to create a mighty fine look
+- (void)collectionView:(UICollectionView *)collectionView
+didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.photoStorage.currentPhoto = indexPath.row;
+    NSLog(@"Current Photo to check for array = %lu", self.photoStorage.currentPhoto);
+}
+
+//The next three methods minimize spacing between photos to create a mighty fine look
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
 }
@@ -174,57 +153,15 @@ static NSString * const reuseIdentifier = @"Cell";
     return 0.5;
 }
 
-//Set up NSManagedObject for fetching-saving
-- (NSManagedObjectContext *)managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
--(NSMutableArray *)thumbnailArray
-{
-    if(!_thumbnailArray) _thumbnailArray = [[NSMutableArray alloc] init];
-    return _thumbnailArray;
-}
-
--(NSMutableArray *)fullResolutionImageArray
-{
-    if(!_fullResolutionImageArray) _fullResolutionImageArray = [[NSMutableArray alloc] init];
-    return _fullResolutionImageArray;
-}
-
-//To scale down the images for UICollectionView to display #performanceissues
--(UIImage *)imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size
-{
-    CGFloat scale = MAX(size.width/image.size.width, size.height/image.size.height);
-    CGFloat width = image.size.width * scale;
-    CGFloat height = image.size.height * scale;
-    CGRect imageRect = CGRectMake((size.width - width)/2.0f,
-                                  (size.height - height)/2.0f,
-                                  width,
-                                  height);
-    
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-    [image drawInRect:imageRect];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
  #pragma mark - Navigation
  
 //Pass NSManagedObject through viewControllers to view users selected phone
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([[segue identifier] isEqualToString:@"toViewPhoto"]){
-        NSIndexPath *index = [self.collectionView indexPathForCell:sender];
-        NSData *image = [self.fullResolutionImageArray objectAtIndex:index.row];
         UINavigationController *nav = [segue destinationViewController];
         ViewPhotoVC *destViewController = (ViewPhotoVC *)nav.topViewController;
-        destViewController.selectedImage = image;
+        destViewController.photoStorage = self.photoStorage;
     }
 }
 

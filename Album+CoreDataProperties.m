@@ -2,7 +2,7 @@
 //  Album+CoreDataProperties.m
 //  Calculator
 //
-//  Created by Corey Allen Pett on 10/16/15.
+//  Created by Corey Allen Pett on 11/11/15.
 //  Copyright © 2015 Corey Allen Pett. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

@@ -15,6 +15,13 @@
 
 @implementation PasswordTVC
 
+//Create passwordStorage object
+-(PasswordStorage *)passwordStorage
+{
+    if(!_passwordStorage) _passwordStorage = [[PasswordStorage alloc] init];
+    return _passwordStorage;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -23,13 +30,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     //Fetch all the users saved passwords
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Passwords"];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]];
-    self.userPasswords = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-
+    [self.passwordStorage fetchPasswords];
     [self.tableView reloadData];
 }
 
@@ -48,18 +50,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.userPasswords.count;
+    return self.passwordStorage.userPasswords.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     // Configure the cell...
-    Passwords *password = [self.userPasswords objectAtIndex:indexPath.row];
+    Passwords *password = [self.passwordStorage.userPasswords objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:25.0f];
-    [cell.textLabel setText:[password valueForKey:@"title"]];
+    [cell.textLabel setText:password.title];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.passwordStorage.selectedPassword = [self.passwordStorage.userPasswords objectAtIndex:indexPath.row];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,34 +76,13 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete object from database
-        [context deleteObject:[self.userPasswords objectAtIndex:indexPath.row]];
-        
-        NSError *error = nil;
-        if (![context save:&error]) {
-            NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
-            return;
-        }
-        
-        //Remove password from table view
-        [self.userPasswords removeObjectAtIndex:indexPath.row];
+        [self.passwordStorage deletePassword:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
-//Set up NSManagedObject for fetching
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
 
 #pragma mark - Navigation
 
@@ -104,9 +90,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"toViewPassword"]) {
-        NSManagedObject *selectedPassword = [self.userPasswords objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         ViewPasswordVC *destViewController = segue.destinationViewController;
-        destViewController.password = selectedPassword;
+        destViewController.passwordStorage = self.passwordStorage;
     }
 }
 

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ContactStorage.h"
 #import "Contacts+CoreDataProperties.h"
 
 @interface ContactsTVC : UITableViewController
 
-@property (strong, nonatomic) NSMutableArray *userContacts;
+@property (strong, nonatomic) ContactStorage *contactStorage;
 
 @end
