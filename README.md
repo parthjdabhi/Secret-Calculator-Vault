@@ -4,7 +4,6 @@ An application that hides your information from others behind a second lock from
 
 You can add photos, contacts, notes, passwords, and browse the internet with no saved history.
 
-I am still working on the photos portion of my application.
 
 Future Features:
 
