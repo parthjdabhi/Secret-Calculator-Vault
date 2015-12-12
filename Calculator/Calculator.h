@@ -16,13 +16,6 @@
 @property (nonatomic, strong) NSString *calculationStringOne;
 @property (nonatomic, strong) NSString *selectedOperator;
 
-//Used for creating user password
-@property (nonatomic, strong) NSString *userPassword;
-@property (nonatomic) BOOL isPasswordCreated;
--(BOOL)unlockCalculatorVault;
--(void)retrievePassword;
--(void)createUserPassword;
-
 //Operations Use
 -(void)switchSignNumber:(BOOL)isOperatorSelected;
 -(void)performCalculation;

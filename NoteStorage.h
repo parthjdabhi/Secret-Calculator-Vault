@@ -16,6 +16,7 @@
 @property (strong, nonatomic) Notes *selectedNote;
 
 -(void)createNote:(NSString *)notes;
+-(void)saveNote:(NSString *)notes;
 -(void)fetchNotes;
 -(void)deleteNote:(long)index;
 

@@ -10,6 +10,8 @@
 
 @interface CalculatorVC : UIViewController
 
+@property (nonatomic) BOOL changeLock;
+@property (nonatomic) BOOL lockVault;
 
 @end
 

@@ -27,4 +27,14 @@
              notes:(NSString *)notes
            website:(NSString *)website;
 
+-(void)saveContact:(NSString *)firstName
+            lastName:(NSString *)lastName
+             company:(NSString *)company
+        mobileNumber:(NSString *)mobileNumber
+          homeNumber:(NSString *)homeNumber
+          workNumber:(NSString *)workNumber
+               email:(NSString *)email
+               notes:(NSString *)notes
+             website:(NSString *)website;
+
 @end

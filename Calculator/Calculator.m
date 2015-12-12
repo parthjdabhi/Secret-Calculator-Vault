@@ -226,45 +226,4 @@
     return output;
 }
 
-#pragma Password Related Methods
-//Check if user created a password
--(void)retrievePassword
-{
-    self.userPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"password"];
-    if(!self.userPassword) {
-        self.isPasswordCreated = NO;
-    }
-    else {
-        self.isPasswordCreated = YES;
-    }
-}
-
-//Create the userPassword and store it
--(void)createUserPassword
-{
-    //Set user password
-    if (!self.userPassword) {
-        self.userPassword = self.outputAsString;
-        [self clearCalculator];
-    }
-    //Confirm user password
-    else if (self.userPassword){
-        if([self.userPassword isEqualToString:self.outputAsString]) {
-            self.isPasswordCreated = YES;
-            [[NSUserDefaults standardUserDefaults]setValue:self.userPassword forKey:@"password"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self clearCalculator];
-        }
-    }
-}
-
-//Executed when "%" is pressed, check if user typed in his/her password
--(BOOL)unlockCalculatorVault
-{
-    if([self.outputAsString isEqualToString:self.userPassword]){
-        return YES;
-    }
-    return NO;
-}
-
 @end

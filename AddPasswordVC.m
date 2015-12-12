@@ -104,14 +104,13 @@
 
 - (IBAction)saveButton:(id)sender
 {
-    //Save user contact information when user is editing a current contact
+    //Save user contact information if user is editing a current contact
     if(self.passwordStorage.selectedPassword){
-        self.passwordStorage.selectedPassword.title = self.titleTextfield.text;
-        self.passwordStorage.selectedPassword.username = self.usernameTextfield.text;
-        self.passwordStorage.selectedPassword.password = self.passwordTextfield.text;
-        self.passwordStorage.selectedPassword.website = self.websiteTextfield.text;
-        self.passwordStorage.selectedPassword.notes = self.notesTextfield.text;
-        self.passwordStorage.selectedPassword.date = [NSDate date];
+        [self.passwordStorage savePassword:self.titleTextfield.text
+                                  username:self.usernameTextfield.text
+                                  password:self.passwordTextfield.text
+                                   website:self.websiteTextfield.text
+                                     notes:self.notesTextfield.text];
     }
     
     //If user is not editing a current contact, create new contact

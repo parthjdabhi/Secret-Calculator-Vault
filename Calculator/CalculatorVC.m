@@ -8,6 +8,8 @@
 
 #import "CalculatorVC.h"
 #import "Calculator.h"
+#import "Settings.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface CalculatorVC ()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *allButtons;
@@ -44,6 +46,7 @@
 @property (nonatomic) BOOL boolMultiplicationButton;
 
 @property (strong, nonatomic) Calculator *calculator;
+@property (strong, nonatomic) Settings *settings;
 
 @end
 
@@ -57,6 +60,13 @@ static int createPasswordCount = 0;
 {
     if(!_calculator) _calculator = [[Calculator alloc] init];
     return _calculator;
+}
+
+//Create a settings object
+-(Settings *)settings
+{
+    if(!_settings) _settings = [[Settings alloc] init];
+    return _settings;
 }
 
 //The operators on the calculator
@@ -81,28 +91,40 @@ static int createPasswordCount = 0;
 - (IBAction)percentage:(UIButton *)sender
 {
     //The if the password on the calculator is not set, let user create one logic
-    if (!self.calculator.isPasswordCreated){
-        [self.calculator createUserPassword];
+    if (!self.settings.isPasswordCreated){
+        [self.settings createUserPassword:self.calculator.outputAsString];
+        [self.calculator clearCalculator];
         if (createPasswordCount == 0){
             self.calculatorOutputLabel.text = @"Confirm Password";
             createPasswordCount++;
         }
-        else if (createPasswordCount == 1 && self.calculator.isPasswordCreated) {
-            self.clickMeLabel.hidden = YES;
-            self.calculatorOutputLabel.text = @"Enjoy :)";
-            createPasswordCount++;
+        else if (createPasswordCount == 1 && self.settings.isPasswordCreated) {
+            if(self.changeLock){
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            else{
+                self.clickMeLabel.hidden = YES;
+                self.calculatorOutputLabel.text = @"Enjoy :)";
+                createPasswordCount++;
+            }
         }
         else {
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
             self.calculatorOutputLabel.text = @"Incorrect - Try Again";
             createPasswordCount = 0;
             [self.calculator clearCalculator];
-            self.calculator.isPasswordCreated = NO;
-            self.calculator.userPassword = nil;
+            self.settings.isPasswordCreated = NO;
+            self.settings.userPassword = nil;
         }
     }
-    else if ([self.calculator unlockCalculatorVault]) {
+    else if (self.settings.isPasswordCreated && [self.settings unlockVault:self.calculator.outputAsString]) {
         self.clickMeLabel.hidden = YES;
-        [self performSegueWithIdentifier:@"SecretAccessTVC" sender:self];
+        if(self.lockVault){
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        else {
+            [self performSegueWithIdentifier:@"UnlockCalculatorVault" sender:self];
+        }
     }
     else {
         [self.calculator concatDecimal:1
@@ -379,8 +401,12 @@ static int createPasswordCount = 0;
     }
     
     //Used to help user create his/her password
-    [self.calculator retrievePassword];
-    if(!self.calculator.isPasswordCreated) {
+    [self.settings retrievePassword];
+    if (self.changeLock){
+        [self.settings resetUserPassword];
+    }
+    if(!self.settings.isPasswordCreated) {
+        createPasswordCount = 0;
         self.calculatorOutputLabel.text = @"Choose Password";
         UIAlertController * alert=   [UIAlertController
                                       alertControllerWithTitle:@"Instructions"

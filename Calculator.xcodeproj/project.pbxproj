@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		F30770D71B44BA2E0080EDD5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F30770D61B44BA2E0080EDD5 /* main.m */; };
 		F30770DA1B44BA2E0080EDD5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F30770D91B44BA2E0080EDD5 /* AppDelegate.m */; };
 		F30770DD1B44BA2E0080EDD5 /* CalculatorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F30770DC1B44BA2E0080EDD5 /* CalculatorVC.m */; };
-		F30770E01B44BA2E0080EDD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F30770DE1B44BA2E0080EDD5 /* Main.storyboard */; };
 		F30770E21B44BA2E0080EDD5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F30770E11B44BA2E0080EDD5 /* Images.xcassets */; };
 		F30770E51B44BA2E0080EDD5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F30770E31B44BA2E0080EDD5 /* LaunchScreen.xib */; };
 		F30770F11B44BA2E0080EDD5 /* CalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F30770F01B44BA2E0080EDD5 /* CalculatorTests.m */; };
@@ -24,6 +23,9 @@
 		F385EF951BDAA55800A0FC90 /* ViewPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F385EF941BDAA55800A0FC90 /* ViewPhotoVC.m */; };
 		F38614DD1BE55C04000363EF /* Photo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F38614DA1BE55C04000363EF /* Photo+CoreDataProperties.m */; };
 		F38614DE1BE55C04000363EF /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = F38614DC1BE55C04000363EF /* Photo.m */; };
+		F38DF78B1C0779D200C82A64 /* PatternVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F38DF78A1C0779D200C82A64 /* PatternVC.m */; };
+		F38DF7901C0787A300C82A64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F38DF78E1C0787A300C82A64 /* Main.storyboard */; };
+		F38DF7931C092A4400C82A64 /* PatternLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = F38DF7921C092A4400C82A64 /* PatternLockView.m */; };
 		F39136A21BF94D3E00ACF081 /* NoteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = F39136A11BF94D3E00ACF081 /* NoteStorage.m */; };
 		F39136A51BF94E2900ACF081 /* ContactStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = F39136A41BF94E2900ACF081 /* ContactStorage.m */; };
 		F39136A81BF94E3A00ACF081 /* PasswordStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = F39136A71BF94E3A00ACF081 /* PasswordStorage.m */; };
@@ -38,10 +40,16 @@
 		F3CBDE021BC23F5B00910B81 /* ViewNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CBDE011BC23F5B00910B81 /* ViewNoteVC.m */; };
 		F3D12FA81BBA014E00BA5005 /* Passwords+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D12FA51BBA014E00BA5005 /* Passwords+CoreDataProperties.m */; };
 		F3D12FA91BBA014E00BA5005 /* Passwords.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D12FA71BBA014E00BA5005 /* Passwords.m */; };
+		F3E15CB01C05A44900296B44 /* AlphabeticalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3E15CAF1C05A44900296B44 /* AlphabeticalVC.m */; };
 		F3EBBC4A1BAB5FA500A71E4A /* Calculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3EBBC481BAB5FA500A71E4A /* Calculator.xcdatamodeld */; };
 		F3EBBC5C1BACB6F600A71E4A /* ContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EBBC5B1BACB6F600A71E4A /* ContactsTVC.m */; };
 		F3EBBC631BACC0DA00A71E4A /* ViewContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EBBC621BACC0DA00A71E4A /* ViewContactVC.m */; };
 		F3EBBC691BAE241900A71E4A /* AddContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EBBC681BAE241900A71E4A /* AddContactVC.m */; };
+		F3EE2A0E1BFEBE16003BBD46 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EE2A0D1BFEBE16003BBD46 /* Settings.m */; };
+		F3EE2A111BFEC786003BBD46 /* SecurityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EE2A101BFEC786003BBD46 /* SecurityVC.m */; };
+		F3EE2A191BFED00E003BBD46 /* Alphabetical.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EE2A181BFED00E003BBD46 /* Alphabetical.m */; };
+		F3EE2A1F1BFED048003BBD46 /* Numerical.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EE2A1E1BFED048003BBD46 /* Numerical.m */; };
+		F3EE2A221C00034E003BBD46 /* NumericalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EE2A211C00034E003BBD46 /* NumericalVC.m */; };
 		F3FB78571BCDABDD005DFEFF /* PhotoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3FB78561BCDABDD005DFEFF /* PhotoTVC.m */; };
 		F3FB785A1BCDAC5B005DFEFF /* PhotoCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3FB78591BCDAC5B005DFEFF /* PhotoCVC.m */; };
 /* End PBXBuildFile section */
@@ -64,7 +72,6 @@
 		F30770D91B44BA2E0080EDD5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F30770DB1B44BA2E0080EDD5 /* CalculatorVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CalculatorVC.h; path = ../Calculator/CalculatorVC.h; sourceTree = "<group>"; };
 		F30770DC1B44BA2E0080EDD5 /* CalculatorVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CalculatorVC.m; path = ../Calculator/CalculatorVC.m; sourceTree = "<group>"; };
-		F30770DF1B44BA2E0080EDD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F30770E11B44BA2E0080EDD5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F30770E41B44BA2E0080EDD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F30770EA1B44BA2E0080EDD5 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,7 +90,7 @@
 		F34C901A1BF3297D00F3F953 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
 		F34C901C1BF3BFF300F3F953 /* Album+methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Album+methods.h"; sourceTree = "<group>"; };
 		F34C901D1BF3BFF300F3F953 /* Album+methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Album+methods.m"; sourceTree = "<group>"; };
-		F37673601BF10EEC00B1C0A4 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
+		F37673601BF10EEC00B1C0A4 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsVC.h; path = ../Calculator/SettingsVC.h; sourceTree = "<group>"; };
 		F37673611BF10EEC00B1C0A4 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsVC.m; path = ../Calculator/SettingsVC.m; sourceTree = "<group>"; };
 		F385EF931BDAA55800A0FC90 /* ViewPhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPhotoVC.h; sourceTree = SOURCE_ROOT; };
 		F385EF941BDAA55800A0FC90 /* ViewPhotoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewPhotoVC.m; sourceTree = SOURCE_ROOT; };
@@ -91,6 +98,11 @@
 		F38614DA1BE55C04000363EF /* Photo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		F38614DB1BE55C04000363EF /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		F38614DC1BE55C04000363EF /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		F38DF7891C0779D200C82A64 /* PatternVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PatternVC.h; path = ../Calculator/PatternVC.h; sourceTree = "<group>"; };
+		F38DF78A1C0779D200C82A64 /* PatternVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PatternVC.m; path = ../Calculator/PatternVC.m; sourceTree = "<group>"; };
+		F38DF78F1C0787A300C82A64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Calculator/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F38DF7911C092A4400C82A64 /* PatternLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatternLockView.h; sourceTree = SOURCE_ROOT; };
+		F38DF7921C092A4400C82A64 /* PatternLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatternLockView.m; sourceTree = SOURCE_ROOT; };
 		F39136A01BF94D3E00ACF081 /* NoteStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoteStorage.h; path = ../NoteStorage.h; sourceTree = "<group>"; };
 		F39136A11BF94D3E00ACF081 /* NoteStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoteStorage.m; path = ../NoteStorage.m; sourceTree = "<group>"; };
 		F39136A31BF94E2900ACF081 /* ContactStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactStorage.h; sourceTree = SOURCE_ROOT; };
@@ -119,6 +131,8 @@
 		F3D12FA51BBA014E00BA5005 /* Passwords+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Passwords+CoreDataProperties.m"; sourceTree = "<group>"; };
 		F3D12FA61BBA014E00BA5005 /* Passwords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Passwords.h; sourceTree = "<group>"; };
 		F3D12FA71BBA014E00BA5005 /* Passwords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Passwords.m; sourceTree = "<group>"; };
+		F3E15CAE1C05A44900296B44 /* AlphabeticalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlphabeticalVC.h; path = ../AlphabeticalVC.h; sourceTree = "<group>"; };
+		F3E15CAF1C05A44900296B44 /* AlphabeticalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlphabeticalVC.m; path = ../AlphabeticalVC.m; sourceTree = "<group>"; };
 		F3EBBC491BAB5FA500A71E4A /* Calculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Calculator.xcdatamodel; sourceTree = "<group>"; };
 		F3EBBC5A1BACB6F600A71E4A /* ContactsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsTVC.h; path = ../Calculator/ContactsTVC.h; sourceTree = "<group>"; };
 		F3EBBC5B1BACB6F600A71E4A /* ContactsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsTVC.m; path = ../Calculator/ContactsTVC.m; sourceTree = "<group>"; };
@@ -126,6 +140,16 @@
 		F3EBBC621BACC0DA00A71E4A /* ViewContactVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewContactVC.m; path = ../Calculator/ViewContactVC.m; sourceTree = "<group>"; };
 		F3EBBC671BAE241900A71E4A /* AddContactVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddContactVC.h; path = ../AddContactVC.h; sourceTree = "<group>"; };
 		F3EBBC681BAE241900A71E4A /* AddContactVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddContactVC.m; path = ../AddContactVC.m; sourceTree = "<group>"; };
+		F3EE2A0C1BFEBE16003BBD46 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = ../Calculator/Settings.h; sourceTree = "<group>"; };
+		F3EE2A0D1BFEBE16003BBD46 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = ../Calculator/Settings.m; sourceTree = "<group>"; };
+		F3EE2A0F1BFEC786003BBD46 /* SecurityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityVC.h; path = ../Calculator/SecurityVC.h; sourceTree = "<group>"; };
+		F3EE2A101BFEC786003BBD46 /* SecurityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecurityVC.m; path = ../Calculator/SecurityVC.m; sourceTree = "<group>"; };
+		F3EE2A171BFED00E003BBD46 /* Alphabetical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alphabetical.h; path = ../Alphabetical.h; sourceTree = "<group>"; };
+		F3EE2A181BFED00E003BBD46 /* Alphabetical.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alphabetical.m; path = ../Alphabetical.m; sourceTree = "<group>"; };
+		F3EE2A1D1BFED048003BBD46 /* Numerical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Numerical.h; path = ../Numerical.h; sourceTree = "<group>"; };
+		F3EE2A1E1BFED048003BBD46 /* Numerical.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Numerical.m; path = ../Numerical.m; sourceTree = "<group>"; };
+		F3EE2A201C00034E003BBD46 /* NumericalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NumericalVC.h; path = ../Calculator/NumericalVC.h; sourceTree = "<group>"; };
+		F3EE2A211C00034E003BBD46 /* NumericalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NumericalVC.m; path = ../Calculator/NumericalVC.m; sourceTree = "<group>"; };
 		F3FB78551BCDABDD005DFEFF /* PhotoTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoTVC.h; path = ../Calculator/PhotoTVC.h; sourceTree = "<group>"; };
 		F3FB78561BCDABDD005DFEFF /* PhotoTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoTVC.m; path = ../Calculator/PhotoTVC.m; sourceTree = "<group>"; };
 		F3FB78581BCDAC5B005DFEFF /* PhotoCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoCVC.h; path = ../Calculator/PhotoCVC.h; sourceTree = "<group>"; };
@@ -154,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				F3405C371BA746B500042B5D /* CalculatorCoreData */,
-				F30770D31B44BA2E0080EDD5 /* Calculator */,
+				F30770D31B44BA2E0080EDD5 /* SecretPhotoVault */,
 				F30770ED1B44BA2E0080EDD5 /* CalculatorTests */,
 				F30770D21B44BA2E0080EDD5 /* Products */,
 			);
@@ -169,13 +193,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F30770D31B44BA2E0080EDD5 /* Calculator */ = {
+		F30770D31B44BA2E0080EDD5 /* SecretPhotoVault */ = {
 			isa = PBXGroup;
 			children = (
 				F3CBDA051B4CA0580096F1AB /* View Controllers */,
 				F3CBDA041B4CA0220096F1AB /* Model */,
 				F30770D41B44BA2E0080EDD5 /* Supporting Files */,
 			);
+			name = SecretPhotoVault;
 			path = Calculator;
 			sourceTree = "<group>";
 		};
@@ -185,8 +210,7 @@
 				F30770D81B44BA2E0080EDD5 /* AppDelegate.h */,
 				F30770D91B44BA2E0080EDD5 /* AppDelegate.m */,
 				F30770E31B44BA2E0080EDD5 /* LaunchScreen.xib */,
-				F30770DE1B44BA2E0080EDD5 /* Main.storyboard */,
-				F37673601BF10EEC00B1C0A4 /* SettingsVC.h */,
+				F38DF78E1C0787A300C82A64 /* Main.storyboard */,
 				F30770E11B44BA2E0080EDD5 /* Images.xcassets */,
 				F30770D51B44BA2E0080EDD5 /* Info.plist */,
 				F30770D61B44BA2E0080EDD5 /* main.m */,
@@ -253,7 +277,11 @@
 		F37673631BF10F4C00B1C0A4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F3EE2A231C000372003BBD46 /* Lock Types */,
+				F37673601BF10EEC00B1C0A4 /* SettingsVC.h */,
 				F37673611BF10EEC00B1C0A4 /* SettingsVC.m */,
+				F3EE2A0F1BFEC786003BBD46 /* SecurityVC.h */,
+				F3EE2A101BFEC786003BBD46 /* SecurityVC.m */,
 			);
 			name = Settings;
 			path = Calculator.xcodeproj;
@@ -262,6 +290,8 @@
 		F37673641BF10F6B00B1C0A4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F3EE2A0C1BFEBE16003BBD46 /* Settings.h */,
+				F3EE2A0D1BFEBE16003BBD46 /* Settings.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -319,19 +349,10 @@
 			path = ../Calculator;
 			sourceTree = "<group>";
 		};
-		F3C3065D1BEEBF3500D7DA33 /* Calculator */ = {
-			isa = PBXGroup;
-			children = (
-				F3CBDA011B4CA00C0096F1AB /* Calculator.h */,
-				F3CBDA021B4CA00C0096F1AB /* Calculator.m */,
-			);
-			name = Calculator;
-			sourceTree = "<group>";
-		};
 		F3CBDA041B4CA0220096F1AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F3C3065D1BEEBF3500D7DA33 /* Calculator */,
+				F3EE2A131BFECFBB003BBD46 /* Lock Types */,
 				F39136AA1BF94E6900ACF081 /* Password */,
 				F39136AB1BF94E7500ACF081 /* Contacts */,
 				F39136A91BF94E4D00ACF081 /* Notes */,
@@ -345,7 +366,6 @@
 		F3CBDA051B4CA0580096F1AB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F3E72EA01BC6EB0100EF664A /* Calculator */,
 				F3E72E9F1BC6EAEA00EF664A /* WebBrowser */,
 				F3EBBC5D1BACB91600A71E4A /* Contacts */,
 				F3973CAD1BB3147600DCA383 /* Password */,
@@ -364,15 +384,6 @@
 				F3BAF5B41B9D1B2300C47EC4 /* WebBrowserVC.m */,
 			);
 			name = WebBrowser;
-			sourceTree = "<group>";
-		};
-		F3E72EA01BC6EB0100EF664A /* Calculator */ = {
-			isa = PBXGroup;
-			children = (
-				F30770DB1B44BA2E0080EDD5 /* CalculatorVC.h */,
-				F30770DC1B44BA2E0080EDD5 /* CalculatorVC.m */,
-			);
-			name = Calculator;
 			sourceTree = "<group>";
 		};
 		F3EBBC561BAB988F00A71E4A /* PhotoAlbum */ = {
@@ -399,6 +410,36 @@
 				F3EBBC621BACC0DA00A71E4A /* ViewContactVC.m */,
 			);
 			name = Contacts;
+			sourceTree = "<group>";
+		};
+		F3EE2A131BFECFBB003BBD46 /* Lock Types */ = {
+			isa = PBXGroup;
+			children = (
+				F3EE2A171BFED00E003BBD46 /* Alphabetical.h */,
+				F3EE2A181BFED00E003BBD46 /* Alphabetical.m */,
+				F3EE2A1D1BFED048003BBD46 /* Numerical.h */,
+				F3EE2A1E1BFED048003BBD46 /* Numerical.m */,
+				F38DF7911C092A4400C82A64 /* PatternLockView.h */,
+				F38DF7921C092A4400C82A64 /* PatternLockView.m */,
+				F3CBDA011B4CA00C0096F1AB /* Calculator.h */,
+				F3CBDA021B4CA00C0096F1AB /* Calculator.m */,
+			);
+			name = "Lock Types";
+			sourceTree = "<group>";
+		};
+		F3EE2A231C000372003BBD46 /* Lock Types */ = {
+			isa = PBXGroup;
+			children = (
+				F30770DB1B44BA2E0080EDD5 /* CalculatorVC.h */,
+				F30770DC1B44BA2E0080EDD5 /* CalculatorVC.m */,
+				F3EE2A201C00034E003BBD46 /* NumericalVC.h */,
+				F3EE2A211C00034E003BBD46 /* NumericalVC.m */,
+				F3E15CAE1C05A44900296B44 /* AlphabeticalVC.h */,
+				F3E15CAF1C05A44900296B44 /* AlphabeticalVC.m */,
+				F38DF7891C0779D200C82A64 /* PatternVC.h */,
+				F38DF78A1C0779D200C82A64 /* PatternVC.m */,
+			);
+			name = "Lock Types";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,7 +500,7 @@
 				};
 			};
 			buildConfigurationList = F30770CC1B44BA2E0080EDD5 /* Build configuration list for PBXProject "Calculator" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -482,7 +523,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F30770E01B44BA2E0080EDD5 /* Main.storyboard in Resources */,
+				F38DF7901C0787A300C82A64 /* Main.storyboard in Resources */,
 				F30770E51B44BA2E0080EDD5 /* LaunchScreen.xib in Resources */,
 				F30770E21B44BA2E0080EDD5 /* Images.xcassets in Resources */,
 			);
@@ -502,24 +543,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3EE2A111BFEC786003BBD46 /* SecurityVC.m in Sources */,
 				F30DD0731BBDC24C009EE47D /* Contacts+CoreDataProperties.m in Sources */,
 				F3FB785A1BCDAC5B005DFEFF /* PhotoCVC.m in Sources */,
 				F38614DD1BE55C04000363EF /* Photo+CoreDataProperties.m in Sources */,
 				F38614DE1BE55C04000363EF /* Photo.m in Sources */,
 				F3CBDE021BC23F5B00910B81 /* ViewNoteVC.m in Sources */,
+				F3EE2A191BFED00E003BBD46 /* Alphabetical.m in Sources */,
 				F3EBBC5C1BACB6F600A71E4A /* ContactsTVC.m in Sources */,
 				F30770DD1B44BA2E0080EDD5 /* CalculatorVC.m in Sources */,
 				F3EBBC4A1BAB5FA500A71E4A /* Calculator.xcdatamodeld in Sources */,
 				F385EF951BDAA55800A0FC90 /* ViewPhotoVC.m in Sources */,
 				F30DD0741BBDC24C009EE47D /* Contacts.m in Sources */,
+				F3EE2A0E1BFEBE16003BBD46 /* Settings.m in Sources */,
 				F3EBBC631BACC0DA00A71E4A /* ViewContactVC.m in Sources */,
 				F3D12FA91BBA014E00BA5005 /* Passwords.m in Sources */,
 				F39136A51BF94E2900ACF081 /* ContactStorage.m in Sources */,
+				F3E15CB01C05A44900296B44 /* AlphabeticalVC.m in Sources */,
+				F38DF78B1C0779D200C82A64 /* PatternVC.m in Sources */,
+				F3EE2A221C00034E003BBD46 /* NumericalVC.m in Sources */,
 				F3CBDA031B4CA00C0096F1AB /* Calculator.m in Sources */,
 				F34C901B1BF3297D00F3F953 /* Album.m in Sources */,
 				F34C90181BF3281800F3F953 /* Album+CoreDataProperties.m in Sources */,
 				F3973CB21BB314D800DCA383 /* PasswordTVC.m in Sources */,
 				F30770DA1B44BA2E0080EDD5 /* AppDelegate.m in Sources */,
+				F38DF7931C092A4400C82A64 /* PatternLockView.m in Sources */,
 				F37673621BF10EEC00B1C0A4 /* SettingsVC.m in Sources */,
 				F30770D71B44BA2E0080EDD5 /* main.m in Sources */,
 				F3973CC11BB33BB600DCA383 /* Notes.m in Sources */,
@@ -532,6 +580,7 @@
 				F3BAF5B51B9D1B2300C47EC4 /* WebBrowserVC.m in Sources */,
 				F34C901E1BF3BFF300F3F953 /* Album+methods.m in Sources */,
 				F39136A21BF94D3E00ACF081 /* NoteStorage.m in Sources */,
+				F3EE2A1F1BFED048003BBD46 /* Numerical.m in Sources */,
 				F3EBBC691BAE241900A71E4A /* AddContactVC.m in Sources */,
 				F3D12FA81BBA014E00BA5005 /* Passwords+CoreDataProperties.m in Sources */,
 				F3FB78571BCDABDD005DFEFF /* PhotoTVC.m in Sources */,
@@ -557,20 +606,21 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F30770DE1B44BA2E0080EDD5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F30770DF1B44BA2E0080EDD5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F30770E31B44BA2E0080EDD5 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F30770E41B44BA2E0080EDD5 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		F38DF78E1C0787A300C82A64 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F38DF78F1C0787A300C82A64 /* Base */,
+			);
+			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

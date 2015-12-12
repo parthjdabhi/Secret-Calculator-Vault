@@ -65,6 +65,36 @@
     }
 }
 
+-(void)saveContact:(NSString *)firstName
+            lastName:(NSString *)lastName
+             company:(NSString *)company
+        mobileNumber:(NSString *)mobileNumber
+          homeNumber:(NSString *)homeNumber
+          workNumber:(NSString *)workNumber
+               email:(NSString *)email
+               notes:(NSString *)notes
+             website:(NSString *)website
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+
+    self.selectedContact.date = [NSDate date];
+    self.selectedContact.firstName = firstName;
+    self.selectedContact.lastName = lastName;
+    self.selectedContact.company = company;
+    self.selectedContact.mobileNumber = mobileNumber;
+    self.selectedContact.workNumber = workNumber;
+    self.selectedContact.homeNumber = homeNumber;
+    self.selectedContact.email = email;
+    self.selectedContact.notes = notes;
+    self.selectedContact.website = website;
+    
+    NSError *error = nil;
+    // Save the object to persistent store
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+}
+
 //Set up NSManagedObject for CoreData related material
 - (NSManagedObjectContext *)managedObjectContext
 {

@@ -19,6 +19,7 @@
     self.userNotes = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
 }
 
+//Create a new note
 -(void)createNote:(NSString *)notes
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -34,6 +35,29 @@
     }
     newNote.notes = notes;
     
+    NSError *error = nil;
+    // Save the object to persistent store
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+}
+
+//Save a current note
+-(void)saveNote:(NSString *)notes
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    self.selectedNote.date = [NSDate date];
+    
+    //Set the title no bigger than 30 characters
+    if(notes.length > 30){
+        self.selectedNote.title = [notes substringToIndex:30];
+    }
+    else{
+        self.selectedNote.title = notes;
+    }
+    self.selectedNote.notes = notes;
+
     NSError *error = nil;
     // Save the object to persistent store
     if (![context save:&error]) {

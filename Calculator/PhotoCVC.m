@@ -139,6 +139,23 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
     NSLog(@"Current Photo to check for array = %lu", self.photoStorage.currentPhoto);
 }
 
+//Dynamically change cell size based on device size to fit a specific amount of cells
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+{
+    //Change this number to change number of cells in a row
+    int numberOfCellsPerRow = 3;
+    
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenWidth = screenSize.width;
+    // -1 because you have to account for the minimumInteritemSpacing in the below method.
+    CGFloat cellWidth = screenWidth/numberOfCellsPerRow - 1;
+    CGSize size = CGSizeMake(cellWidth, cellWidth);
+    return size;
+}
+
 //The next three methods minimize spacing between photos to create a mighty fine look
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
@@ -146,11 +163,11 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     
-    return 0.00001;
+    return 1;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.5;
+    return 1;
 }
 
  #pragma mark - Navigation

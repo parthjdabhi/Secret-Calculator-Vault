@@ -145,16 +145,15 @@
 {
     //Save user contact information when user is editing a current contact
     if(self.contactStorage.selectedContact){
-        self.contactStorage.selectedContact.firstName = self.firstNameTextfield.text;
-        self.contactStorage.selectedContact.lastName = self.lastNameTextfield.text;
-        self.contactStorage.selectedContact.company = self.companyTextfield.text;
-        self.contactStorage.selectedContact.mobileNumber = self.mobileNumberTextfield.text;
-        self.contactStorage.selectedContact.homeNumber = self.homeNumberTextfield.text;
-        self.contactStorage.selectedContact.workNumber = self.workNumberTextfield.text;
-        self.contactStorage.selectedContact.email = self.emailTextfield.text;
-        self.contactStorage.selectedContact.notes = self.notesTextfield.text;
-        self.contactStorage.selectedContact.website = self.webpageTextfield.text;
-        self.contactStorage.selectedContact.date = [NSDate date];
+        [self.contactStorage saveContact:self.firstNameTextfield.text
+                                  lastName:self.lastNameTextfield.text
+                                   company:self.companyTextfield.text
+                              mobileNumber:self.mobileNumberTextfield.text
+                                homeNumber:self.homeNumberTextfield.text
+                                workNumber:self.workNumberTextfield.text
+                                     email:self.emailTextfield.text
+                                     notes:self.notesTextfield.text
+                                   website:self.webpageTextfield.text];
     }
     
     //If user is not editing a current contact, create new contact
